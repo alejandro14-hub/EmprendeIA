@@ -1,0 +1,36 @@
+mutation CreateProject($userId: UUID!, $name: String!, $status: String!) @auth(level: USER) {
+  project_insert(data: {
+    userId: $userId,
+    name: $name,
+    status: $status,
+    createdAt_expr: "request.time"
+  })
+}
+
+query GetProjectsByUserId($userId: UUID!) @auth(level: USER) {
+  projects(where: {userId: {eq: $userId}}) {
+    id
+    name
+    status
+    description
+  }
+}
+
+mutation UpdateTaskStatus($id: UUID!, $status: String!) @auth(level: USER) {
+  task_update(
+    key: {id: $id}
+    data: {
+      status: $status
+    }
+  )
+}
+
+query ListTasksForProject($projectId: UUID!) @auth(level: USER) {
+  tasks(where: {projectId: {eq: $projectId}}) {
+    id
+    description
+    dueDate
+    status
+    assignedTo
+  }
+}

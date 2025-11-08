@@ -1,0 +1,88 @@
+mutation CreateDemoData @transaction @auth(level: PUBLIC, insecureReason: "This mutation is used for seeding data and is safe to expose to the public.") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      email: "demouser1@example.com",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      email: "demouser2@example.com",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  project_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      name: "Project 1",
+      status: "Active",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      name: "Project 2",
+      status: "Inactive",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  task_insertMany(data: [
+    {
+      id: "750e8400-e29b-41d4-a716-446655440000",
+      projectId: "650e8400-e29b-41d4-a716-446655440000",
+      description: "Task 1 for Project 1",
+      status: "Open",
+      dueDate: "2024-05-01",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440001",
+      projectId: "650e8400-e29b-41d4-a716-446655440001",
+      description: "Task 1 for Project 2",
+      status: "Closed",
+      dueDate: "2024-05-05",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  product_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440000",
+      projectId: "650e8400-e29b-41d4-a716-446655440000",
+      name: "Product 1 for Project 1",
+      currentStock: 100,
+      unitPrice: 25.50,
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "850e8400-e29b-41d4-a716-446655440001",
+      projectId: "650e8400-e29b-41d4-a716-446655440001",
+      name: "Product 1 for Project 2",
+      currentStock: 50,
+      unitPrice: 10.00,
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+  aIInteraction_insertMany(data: [
+    {
+      id: "950e8400-e29b-41d4-a716-446655440000",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      projectId: "650e8400-e29b-41d4-a716-446655440000",
+      prompt: "AI Interaction 1 for User 1 in Project 1",
+      response: "Response 1",
+      type: "Type A",
+      createdAt: "2024-04-26T12:00:00Z"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440001",
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      projectId: "650e8400-e29b-41d4-a716-446655440001",
+      prompt: "AI Interaction 1 for User 2 in Project 2",
+      response: "Response 2",
+      type: "Type B",
+      createdAt: "2024-04-26T12:00:00Z"
+    }
+  ])
+}
